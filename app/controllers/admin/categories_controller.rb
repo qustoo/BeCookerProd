@@ -26,7 +26,7 @@ class Admin::CategoriesController < Admin::AdminController
   end
 
   def update
-    if @category.update_attributes(category_params)
+    if @category.update(category_params)
       redirect_to admin_categories_path, success: 'Категория успешно обновлена'
     else
       @categories = Category.where("id != #{@category.id}").order(:name)

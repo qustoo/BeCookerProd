@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_many :recipe_attachments
   accepts_nested_attributes_for :recipe_attachments
 
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags,through: :taggings
   belongs_to :category
 

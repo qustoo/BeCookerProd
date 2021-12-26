@@ -1,65 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>BeCooker</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>BeCooker</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-  <div class = "container">
-    <nav class="navbar navbar-expand-lg navbar-inverse bg-inverse">
-      <a class="navbar-brand" href="<%=root_path %>">BeCooker (админпанель)</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item <%= 'active' if current_page?(root_path) || current_page?(recipes_path) %>">
-            <a class="nav-link" href="<%= recipes_path %>">Рецепты<span class="sr-only">(current)</span></a>
+<body>
+<div class = "container">
+  <nav class="navbar navbar-expand-lg navbar-inverse bg-inverse">
+    <a class="navbar-brand" href="<%=root_path %>">BeCooker (админпанель)</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item <%= 'active' if current_page?(root_path) || current_page?(recipes_path) %>">
+          <a class="nav-link" href="<%= recipes_path %>">Рецепты<span class="sr-only">(current)</span></a>
+        </li>
+        <% Category.order(:name).roots.each do |category| %>
+          <li class="nav-item <%= 'active' if current_page?(category_path(category)) %>">
+            <%=link_to category.name, category, class: 'nav-link' %>
           </li>
-          <% Category.order(:name).roots.each do |category| %>
-            <li class="nav-item <%= 'active' if current_page?(category_path(category)) %>">
-              <%=link_to category.name, category, class: 'nav-link' %>
-            </li>
-          <% end %>
+        <% end %>
+        <% if user_signed_in? && current_user.admin? %>>
           <li class="nav-item active">
-            <a class="nav-link" href="<%= categories_path %>">Категории<span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="<%= admin_categories_path %>">Категории<span class="sr-only">(current)</span></a>
           </li>
-        </ul>
-        <%=link_to 'Новая статья', new_recipe_path, class: 'btn btn btn-light' %>
-      </div>
-    </nav>
+        <%end %>
+      </ul>
+      <%#=link_to 'Новая статья', new_recipe_path, class: 'btn btn btn-light' %>
+
+      <ul class="navbar-nav pull-xs-right">
+        <% if user_signed_in? %>
+
+          <li class="nav-item active">
+            <%= link_to "Профиль", edit_user_registration_path, class: "nav-link" %>
+          </li>
+
+          <li class="nav-item active">
+            <%= link_to "Выход", destroy_user_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        <% else %>
+          <li class="nav-item active">
+            <%= link_to "Вход", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Регистрация", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+        <li class="nav-item <%= " active" if I18n.locale == :ru %>">
+          <%= link_to "Рус", { locale: :ru }, class: "nav-link" %>
+        </li>
+        <li class="nav-item <%= " active" if I18n.locale == :en %>">
+          <%= link_to "Eng", { locale: :en }, class: "nav-link" %>
+        </li>
+      </ul>
+
+
+    </div>
+  </nav>
+</div>
+
+
+<div class="container main">
+  <div class="row">
+    <div class="col-md-12">
+      <% flash.each do |name, message| %>
+        <div class="alert <% bootstrap_class_for(name) %>">
+          <button class="close" data-dismiss="alert">
+            &times;
+          </button>
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-
-  <div class="container main">
-    <div class="row">
-      <div class="col-md-12">
-        <% flash.each do |name, message| %>
-          <div class="alert alert-<%= name %>">
-            <%= message %>
-          </div>
+  <div class="row">
+    <div class="col-md-9">
+      <%=yield %>
+    </div>
+    <div class="col-md-3">
+      <%= render 'shared/submenu' %>
+      <div class="tag_cloud">
+        <h2>Теги</h2>
+        <% tag_cloud(Tag.counts, %w{tag1 tag2 tag3 tag4 tag5}) do |tag, css_class| %>
+          <%= link_to tag.name,tag_path(tag.name), class: css_class %>
         <% end %>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-9">
-        <%=yield %>
-      </div>
-      <div class="col-md-3">
-        <%= render 'shared/submenu' %>
-        <div class="tag_cloud">
-          <h2>Теги</h2>
-          <% tag_cloud(Tag.counts, %w{tag1 tag2 tag3 tag4 tag5}) do |tag, css_class| %>
-            <%= link_to tag.name,tag_path(tag.name), class: css_class %>
-          <% end %>
-        </div>
 
-      </div>
-    </div>
 
+    </div>
   </div>
-  </body>
+
+</div>
+</body>
 </html>

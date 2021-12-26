@@ -48,7 +48,7 @@
 
 
   <div class="form-group">
-    <%= form.submit t('recipes.form.submit', action: @recipe.new_record?  ? 'Создать' : 'Изменить'), class: 'btn btn-primary' %>
+    <%= form.submit t('admin.recipes.form.submit', action: @recipe.new_record?  ? 'Создать' : 'Изменить'), class: 'btn btn-primary' %>
     <%= link_to 'Назад',recipes_path, class: 'btn btn-outline-secondary' %>
   </div>
 <% end %>

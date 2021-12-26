@@ -11,16 +11,16 @@ ru:
     index:
       title: 'Рецепты'
   admin:
-    posts:
+    recipes:
       new:
         title: 'Создание новое статьи'
-        edit:
-          title: 'Редактирование статьи'
-        form:
-          submit:
-            '%{action} статью'
-          file_field:
-            'Главное изображение'
+      edit:
+        title: 'Редактирование статьи'
+      form:
+        submit:
+          '%{action} статью'
+        file_field:
+          'Главное изображение'
     categories:
       index:
         title: 'Категории'
