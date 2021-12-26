@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Recipe Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Recipe</th>
+      <th>Image</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recipe_attachments.each do |recipe_attachment| %>
+      <tr>
+        <td><%= recipe_attachment.recipe_id %></td>
+        <td><%= recipe_attachment.image %></td>
+        <td><%= link_to 'Show', recipe_attachment %></td>
+        <td><%= link_to 'Edit', edit_recipe_attachment_path(recipe_attachment) %></td>
+        <td><%= link_to 'Destroy', recipe_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Recipe Attachment', new_recipe_attachment_path %>

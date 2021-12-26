@@ -1,0 +1,12 @@
+ru:
+  activerecord:
+    models:
+      recipe: 'Рецепт'
+    attributes:
+      recipe:
+        title: 'Название рецепта'
+        body: 'Состав рецепта'
+        all_tags: 'Теги'
+    errors:
+      messages:
+        black: 'Поле не может быть пустым'

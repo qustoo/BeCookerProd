@@ -1,0 +1,2 @@
+module RecipeAttachmentsHelper
+end

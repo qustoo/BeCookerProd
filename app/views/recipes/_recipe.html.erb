@@ -1,0 +1,32 @@
+<article class="recipe">
+  <section class="recipe-head">
+    <h2><%= link_to recipe.title, recipe_path(recipe) %></h2>
+    <small>
+      <time>
+        <%= recipe.created_at.to_date.strftime("%d %B, %Y") %>
+      </time>
+      |
+      <%= link_to 'Изменить', edit_recipe_path(recipe) %>
+      |
+      <%= link_to 'Удалить', recipe_path(recipe), method: :delete, data: {confirm: 'Вы уверены?'} %>
+    </small>
+  </section>
+
+<!--  <section class="recipe-summary clearfix">-->
+    <%# @recipe_attachments.each do |ra| %>
+      <%#break %>
+      <%#= image_tag ra.image.url(:large), class: 'img-show' if ra.image? %>
+    <%# end %>
+<!--  </section>-->
+
+
+  <section class="recipe-summary clearfix">
+    <%= image_tag recipe.image.url(:thumb), class: 'img-thumbnail thumb' if recipe.image? %>
+    <%= recipe.body %>
+  </section>
+
+  <section class="footer-summary">
+    <%= raw recipe.tags.map(&:name).map{ |t| link_to t, tag_path(t), class: 'tag tag-primary'}.join(' ') %>
+  </section>
+
+</article>
