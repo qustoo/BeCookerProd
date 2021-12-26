@@ -4,8 +4,8 @@ class CategoriesController < ApplicationController
   def show
     @recipes = Recipe.where(category_id: [@category.subtree_ids]).paginate(page: params[:page], per_page: 1)
   end
-  private
 
+  private
   def set_category
     @category = Category.find(params[:id])
   end
