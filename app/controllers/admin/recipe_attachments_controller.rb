@@ -1,4 +1,4 @@
-class RecipeAttachmentsController < ApplicationController
+class Admin::RecipeAttachmentsController < ApplicationController
   before_action :set_recipe_attachment, only: %i[ show edit update destroy ]
 
   # GET /recipe_attachments or /recipe_attachments.json

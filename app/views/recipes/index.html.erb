@@ -1,3 +1,10 @@
 <h1><%=t('recipes.index.title') %></h1>
-<%= render @recipes %>
+
+<% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'Новый рецепт', new_admin_recipe_path, class: 'btn btn-outline-primary btn-sm' %>
+<% end %>
+<section id='resipes'>
+  <%= render @recipes %>
+</section>
+
 <%= will_paginate @recipes, renderer: 'BootstrapPaginationHelper::LinkRenderer' %>

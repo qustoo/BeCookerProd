@@ -1,7 +1,8 @@
 require "test_helper"
 
 class CategoryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "no unnamed categories" do
+    cat = Category.new
+    assert_not cat.save, "saved category with no title"
+  end
 end

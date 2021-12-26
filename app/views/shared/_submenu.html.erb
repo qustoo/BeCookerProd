@@ -1,0 +1,14 @@
+<div class="submenu">
+  <h2>Категории</h2>
+  <!--  встроенный nav-pills-->
+  <ul class="nav_update nav-pills nav-stacked">
+    <!--    # цикл по родителям-->
+    <% Category.roots.each do |category| %>
+      <li class="nav-item">
+        <%= link_to category.name, category, class: "nav-link #{'active' if current_page?(category_path(category)) || @recipe.present? && @recipe.category == category}" %>
+        <%= render "shared/submenu_categories", categories: category.root.descendants.arrange %>
+        <!--        # descendants - все потомки записи-->
+      </li>
+    <% end %>
+  </ul>
+</div>

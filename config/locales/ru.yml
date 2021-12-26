@@ -8,25 +8,27 @@ ru:
   recipes:
     index:
       title: 'Рецепты'
-    new:
-      title: 'Создание новое статьи'
-    edit:
-      title: 'Редактирование статьи'
-    form:
-      submit:
-        '%{action} статью'
-      file_field:
-        'Главное изображение'
-  categories:
-    index:
-      title: 'Категории'
-    new:
-      title: 'Новая категория'
-    edit:
-      title: 'Редактирование категории'
-    form:
-      submit:
-        '%{action} категорию'
+  admin:
+    posts:
+      new:
+        title: 'Создание новое статьи'
+        edit:
+          title: 'Редактирование статьи'
+        form:
+          submit:
+            '%{action} статью'
+          file_field:
+            'Главное изображение'
+    categories:
+      index:
+        title: 'Категории'
+      new:
+        title: 'Новая категория'
+      edit:
+        title: 'Редактирование категории'
+      form:
+        submit:
+          '%{action} категорию'
   recipe_attachments:
     form:
       image: 'Прочие изображение'
