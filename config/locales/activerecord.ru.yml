@@ -7,6 +7,8 @@ ru:
         title: 'Название рецепта'
         body: 'Состав рецепта'
         all_tags: 'Теги'
+      category:
+        name: 'Название'
     errors:
       messages:
         black: 'Поле не может быть пустым'

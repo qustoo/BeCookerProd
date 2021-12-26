@@ -5,6 +5,10 @@
       <time>
         <%= recipe.created_at.to_date.strftime("%d %B, %Y") %>
       </time>
+      <%if recipe.category.present?%>
+        |
+        <%= link_to recipe.category.name, recipe.category %>
+      <% end %>
       |
       <%= link_to 'Изменить', edit_recipe_path(recipe) %>
       |

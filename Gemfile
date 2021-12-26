@@ -63,3 +63,5 @@ gem 'mini_magick'
 gem 'trix-rails', require: 'trix'
 
 gem 'will_paginate', '~> 3.3'
+
+gem 'ancestry'
