@@ -9,6 +9,8 @@ ru:
         all_tags: 'Теги'
       category:
         name: 'Название'
+        parent_id: 'Родитель'
+
     errors:
       messages:
         black: 'Поле не может быть пустым'

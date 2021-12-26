@@ -1,13 +1,12 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:show, :edit, :update, :destroy ]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @categories = Category.all
   end
 
-
   def show
-    @recipes = Recipe.where(category_id: [@category.subtree_ids]).paginate(page: params[:page], per_page: 5)
+    @recipes = Recipe.where(category_id: [@category.subtree_ids]).paginate(page: params[:page], per_page: 1)
   end
 
   def new
@@ -16,10 +15,11 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    @category = Category.new(category_params)#category_params
+    @category = Category.new(category_params)
     if @category.save
       redirect_to categories_path, success: 'Категория успешно создана'
     else
+      @categories = Category.all.order(:name)
       flash[:danger] = 'Категория не создана'
       render :new
     end
@@ -33,6 +33,7 @@ class CategoriesController < ApplicationController
     if @category.update_attributes(category_params)
       redirect_to categories_path, success: 'Категория успешно обновлена'
     else
+      @categories = Category.where("id != #{@category.id}").order(:name)
       flash[:danger] = 'Категория не обновлена'
       render :edit
     end
@@ -43,8 +44,8 @@ class CategoriesController < ApplicationController
     redirect_to categories_path, success: 'Категория успешно удалена'
   end
 
+  # Приватная секция
   private
-
   def set_category
     @category = Category.find(params[:id])
   end
