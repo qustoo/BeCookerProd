@@ -9,8 +9,11 @@
       <%if @recipe.category.present?%>
         <%= link_to @recipe.category.name, @recipe.category %>
       <% end %>
-      <%= link_to 'Изменить', edit_recipe_path(@recipe) %>
-      <%= link_to 'Удалить', recipes_path(@recipe), method: :delete, data: {confirm: 'Вы уверены?'} %>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to 'Изменить', edit_recipe_path(@recipe) %>
+        <%= link_to 'Удалить', recipes_path(@recipe), method: :delete, data: {confirm: 'Вы уверены?'} %>
+        <%end %>
+
     </small>
   </section>
 
