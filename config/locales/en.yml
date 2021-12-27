@@ -60,3 +60,6 @@ en:
       form:
         submit:
           '%{action} category'
+    recipe_attachments:
+      form:
+        image: 'Other images'
